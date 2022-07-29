@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Luis Adrián Chávez Fregoso",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lacf95/fair-salary.git"
+  },
   "scripts": {
     "start": "echo start",
     "dev": "nodemon index.js"
