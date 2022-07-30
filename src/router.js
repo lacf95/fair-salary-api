@@ -7,6 +7,6 @@ const router = Router();
 // 404 for everything else
 router
   .post('/api/salary-adjustment', salaryAdjustment.calculate)
-  .all('*', () => new Response('Not Found.', { status: 404 }));
+  .all('*', () => new Response(null, { status: 404, headers: { 'Content-type': 'application/json' } }));
 
 export default router.handle;
