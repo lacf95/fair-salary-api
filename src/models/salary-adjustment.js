@@ -1,4 +1,4 @@
-const R = require('ramda');
+import * as R from 'ramda';
 
 const calculate = R.curry((salary, inflationRate) => {
   const adjustment = salary * (inflationRate / 100);
@@ -11,4 +11,4 @@ const calculate = R.curry((salary, inflationRate) => {
   };
 });
 
-module.exports = { calculate };
+export { calculate };

@@ -8,7 +8,7 @@ const toISODateString = x => {
   return `${match[3]}-${match[2]}-${match[1]}`;
 };
 
-module.exports = {
+export {
   secondsToMiliseconds,
   milisecondsToSeconds,
   toISODateString

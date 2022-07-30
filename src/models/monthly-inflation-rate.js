@@ -1,26 +1,22 @@
-const R = require('ramda');
-const fs = require('fs').promises;
+import * as R from 'ramda';
 
-const composeAsync = require('../misc/compose-async.js');
-const storeJson = require('../misc/store-json.js')(process.env.MONTHLY_INFLATION_RATES_FILE);
-const readJson = require('../misc/read-json.js')(process.env.MONTHLY_INFLATION_RATES_FILE);
-const { secondsToMiliseconds } = require('../misc/date-time.js');
+import composeAsync from '../misc/compose-async.js';
+import rates from '../storage/monthly-inflation-rates.js';
+import { secondsToMiliseconds } from '../misc/date-time.js';
 
 const toJsTime = R.compose(a => new Date(a), secondsToMiliseconds);
 const sortDesc = R.sort((a, b) => a.date - b.date);
 const sortAsc = R.sort((a, b) => b.date - a.date);
 const rateProp = R.prop('rate');
 
-const monthsSincePreviousRate = async date => composeAsync([R.length, sortAsc, R.filter(a => a.date >= date), readJson])();
+const monthsSincePreviousRate = date => R.compose(R.length, sortAsc, R.filter(a => a.date >= date))(rates);
 
-const previousRate = async date => composeAsync([rateProp, R.last, sortAsc, R.filter(a => a.date >= date), readJson])();
+const previousRate = date => R.compose(rateProp, R.last, sortAsc, R.filter(a => a.date >= date))(rates);
 
-const latestRate = composeAsync([rateProp, R.last, sortDesc, readJson]);
+const latestRate = () => R.compose(rateProp, R.last, sortDesc)(rates);
 
-const calculateInflationRate = async (a, b, c) => ((await a / await b) ** (1 / await c) - 1) * 100;
+const calculateInflationRate = (a, b, c) => ((a / b) ** (1 / c) - 1) * 100;
 
 const inflationRateSince = R.converge(calculateInflationRate, [latestRate, previousRate, monthsSincePreviousRate]);
 
-const store = storeJson;
-
-module.exports = { inflationRateSince, store };
+export { inflationRateSince };

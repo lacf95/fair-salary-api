@@ -1,7 +1,11 @@
-const R = require('ramda');
-const composeAsync = require('../misc/compose-async.js');
-const renameKeys = require('../misc/rename-keys.js');
-const { milisecondsToSeconds, toISODateString } = require('../misc/date-time.js');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import * as R from 'ramda';
+
+import composeAsync from '../misc/compose-async.js';
+import renameKeys from '../misc/rename-keys.js';
+import { milisecondsToSeconds, toISODateString } from '../misc/date-time.js';
 
 const toJson = R.invoker(0, 'json');
 const toNumber = x => parseFloat(x) || 0;
@@ -31,4 +35,4 @@ const monthlyInflationRates = async () => (composeAsync([
   callAPI
 ])(process.env.BANXICO_MONTHLY_INFLATION_ACTION));
 
-module.exports = { monthlyInflationRates };
+export { monthlyInflationRates };

@@ -1,5 +1,5 @@
-const R = require('ramda');
+import * as R from 'ramda';
 
 const handleAsync = async (fn, res) => res && res.then ? res.then(fn) : fn(res);
 
-module.exports = composeAsync = R.composeWith(handleAsync);
+export default R.composeWith(handleAsync);

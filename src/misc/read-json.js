@@ -1,8 +1,7 @@
-const fs = require('fs').promises;
+import composeAsync from '../misc/compose-async.js';
+import fs from 'fs';
 
-const composeAsync = require('../misc/compose-async.js');
-
-module.exports = file => async () => composeAsync([
+export default file => async () => composeAsync([
   JSON.parse,
   fs.readFile
 ])(file);

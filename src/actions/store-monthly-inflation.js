@@ -1,10 +1,11 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const composeAsync = require('../misc/compose-async.js');
+import composeAsync from '../misc/compose-async.js';
+import { monthlyInflationRates } from '../models/banxico.js';
+import storeJson from '../misc/store-json.js';
 
-const { monthlyInflationRates } = require('../models/banxico.js');
-const { store } = require('../models/monthly-inflation-rate.js');
-
-const storeAllTime = async () => composeAsync([store, monthlyInflationRates])();
+const storeMonthlyInflations = storeJson(process.env.MONTHLY_INFLATION_RATES_FILE);
+const storeAllTime = async () => composeAsync([storeMonthlyInflations, monthlyInflationRates])();
 
 (async () => storeAllTime())();

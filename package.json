@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Luis Adrián Chávez Fregoso",
   "license": "MIT",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/lacf95/fair-salary.git"
@@ -14,12 +15,14 @@
     "dev": "nodemon index.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "wrangler": "^2.0.23"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "itty-router": "^2.6.1",
     "ramda": "^0.28.0"
   }
 }
