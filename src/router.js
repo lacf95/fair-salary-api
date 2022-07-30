@@ -6,7 +6,7 @@ const router = Router();
 
 // 404 for everything else
 router
-  .post('/api/salary-adjustment', salaryAdjustment.calculate)
+  .post('/salary-adjustment', salaryAdjustment.calculate)
   .all('*', () => new Response(null, { status: 404, headers: { 'Content-type': 'application/json' } }));
 
 export default router.handle;
