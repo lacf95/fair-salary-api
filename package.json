@@ -1,7 +1,7 @@
 {
-  "name": "fair-salary",
+  "name": "fair-salary-api",
   "version": "0.1.0",
-  "description": "Adjusted mexican salary for inflation",
+  "description": "Adjusted mexican salary for inflation API",
   "main": "index.js",
   "author": "Luis Adrián Chávez Fregoso",
   "license": "MIT",
