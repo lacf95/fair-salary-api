@@ -14,13 +14,15 @@ const checkCacheBeforeRespond = async (event) => {
   });
 
   const cache = caches.default;
-  console.log(await cache.match(cacheKey))
 
   let response = await cache.match(cacheKey);
 
   if (!response) {
+    console.log(`Processing non-cached request [${cacheUrl.toString()}]`);
     response = await routerHandle(event.request);
     event.waitUntil(cache.put(cacheKey, response.clone()));
+  } else {
+    console.log(`Cached request [${cacheUrl.toString()}]`);
   }
   return response;
 };
