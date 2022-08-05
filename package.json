@@ -21,6 +21,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "itty-router": "^2.6.1",
-    "ramda": "^0.28.0"
+    "ramda": "^0.28.0",
+    "toucan-js": "^2.6.1"
   }
 }
