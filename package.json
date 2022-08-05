@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "echo start",
-    "dev": "npx wrangler dev"
+    "dev": "npx wrangler dev",
+    "publish": "npx wrangler publish"
   },
   "devDependencies": {
     "wrangler": "^2.0.23"
