@@ -33,6 +33,7 @@ const checkCacheBeforeRespond = async (event) => {
     return response;
   } catch(err) {
     console.log(`Something went wrong with request [${cacheUrl.toString()}]`);
+    console.log(err);
     return errorResponse(err);
   }
 };
