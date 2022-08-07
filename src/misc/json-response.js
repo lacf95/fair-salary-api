@@ -4,7 +4,9 @@ import errorToJson from '../misc/error-to-json.js';
 
 const jsonResponse = R.curry((res, status = 200) => new Response(JSON.stringify(res), {
   status, headers: {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-type, Origin',
+    'Access-Control-Allow-Origin': ALLOWED_ORIGINS,
+    'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
     'Content-type': 'application/json'
   }
 }));

@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import logger from '../misc/logger.js';
 import sha256 from '../misc/sha-256.js';
 import composeAsync from '../misc/compose-async.js';
-import { errorResponse } from '../misc/json-response.js';
+import { errorResponse, okResponse } from '../misc/json-response.js';
 
 const cacheKey = (url, hash) => {
   const cacheUrl = new URL(url);
@@ -15,6 +15,10 @@ const cacheKey = (url, hash) => {
 const cacheResponseHandler = handler => async (event) => {
   const log = logger(event);
   const cache = caches.default;
+
+  if (event.request.method === 'OPTIONS') {
+    return okResponse();
+  }
 
   const hash = await composeAsync([sha256, R.invoker(0, 'text'), R.invoker(0, 'clone')])(event.request);
   const key = cacheKey(event.request.url, hash);
