@@ -7,8 +7,8 @@ import { notFoundResponse } from './misc/json-response.js';
 const router = Router();
 
 router
-  .post('/salary-adjustment', salaryAdjustment.calculate)
-  .get('/monthly-inflation/last', monthlyInflation.lastRate)
+  .post('/salary-adjustments', salaryAdjustment.calculate)
+  .get('/monthly-inflations/last', monthlyInflation.lastRate)
   .all('*', notFoundResponse);
 
 export default router.handle;
