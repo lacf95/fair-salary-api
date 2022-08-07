@@ -17,7 +17,7 @@ const cacheResponseHandler = handler => async (event) => {
   const cache = caches.default;
 
   if (event.request.method === 'OPTIONS') {
-    return okResponse();
+    return okResponse(event.request);
   }
 
   const hash = await composeAsync([sha256, R.invoker(0, 'text'), R.invoker(0, 'clone')])(event.request);
@@ -38,7 +38,7 @@ const cacheResponseHandler = handler => async (event) => {
     return response;
   } catch(err) {
     log.error(err);
-    return errorResponse(err);
+    return errorResponse(event.request, err);
   }
 };
 

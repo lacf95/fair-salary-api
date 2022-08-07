@@ -9,16 +9,19 @@ import { inflationRateSince } from '../models/monthly-inflation-rate.js';
 
 const toUnixTime = R.compose(milisecondsToSeconds, Date.parse);
 
-const calculate = composeAsync([
-  okResponse,
-  R.assoc('salaryAdjustment', R.__, {}),
-  R.converge(
-    calculateSalaryAdjustment, [
-      R.compose(R.prop('salary')),
-      R.compose(inflationRateSince, toUnixTime, R.prop('date'))
-    ]
-  ),
-  R.invoker(0, 'json')
-]);
+const calculate = async req => {
+  const res = await composeAsync([
+    R.assoc('salaryAdjustment', R.__, {}),
+    R.converge(
+      calculateSalaryAdjustment, [
+        R.compose(R.prop('salary')),
+        R.compose(inflationRateSince, toUnixTime, R.prop('date'))
+      ]
+    ),
+    R.invoker(0, 'json')
+  ])(req);
+
+  return okResponse(req, res);
+};
 
 export { calculate };
