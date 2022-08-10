@@ -7,7 +7,8 @@ import { errorResponse, okResponse } from '../misc/json-response.js';
 
 const cacheKey = (url, hash) => {
   const cacheUrl = new URL(url);
-  cacheUrl.pathname = `/posts${cacheUrl.pathname}${hash}`;
+  cacheUrl.searchParams.append('cache-key', hash)
+  cacheUrl.searchParams.append('cache-version', CACHE_VERSION);
 
   return cacheUrl.toString();
 };

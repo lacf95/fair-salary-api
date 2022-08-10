@@ -3,3 +3,4 @@ main = "src/index.js"
 compatibility_date = "2022-07-29"
 [vars]
 ENV = "production"
+CACHE_VERSION = '0'
